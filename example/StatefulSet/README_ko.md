@@ -202,37 +202,37 @@
 
 * statefulset 삭제
 
-```shell
-kubectl delete statefulset mongo
+  ```shell
+  $ kubectl delete statefulset mongo
 
-statefulset "mongo" deleted
-```
+  statefulset "mongo" deleted
+  ```
 
 * service 삭제
 
-```shell
-kubectl delete svc mongo
+  ```shell
+  $ kubectl delete svc mongo
 
-service "mongo" deleted
-```
+  service "mongo" deleted
+  ```
 
 * volume 삭제
 
-```shell
-kubectl delete pvc -l role=mongo
+  ```shell
+  $ kubectl delete pvc -l role=mongo
 
-persistentvolumeclaim "mongo-persistent-storage-mongo-0" deleted
-persistentvolumeclaim "mongo-persistent-storage-mongo-1" deleted
-persistentvolumeclaim "mongo-persistent-storage-mongo-2" deleted
-```
+  persistentvolumeclaim "mongo-persistent-storage-mongo-0" deleted
+  persistentvolumeclaim "mongo-persistent-storage-mongo-1" deleted
+  persistentvolumeclaim "mongo-persistent-storage-mongo-2" deleted
+  ```
 
 * cluster 삭제
 
-```shell
-gcloud container clusters delete "hello-mongo"
+  ```shell
+  $ gcloud container clusters delete "hello-mongo"
 
-
-```
+  delte message...
+  ```
 
 <br>
 
