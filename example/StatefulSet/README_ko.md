@@ -65,8 +65,6 @@
 
 ## Lab
 
-<br>
-
 ### Setting up the Storage Class
 
 * 스토리지 클래스 생성 - 데이터베이스가 사용할 스토리지 ssd, hdd
@@ -156,45 +154,49 @@
   mongo-2                 2/2       Running   0          1m
   ```
 
+<br>
+
 ### Mongo replica set 확인
 
 * 첫번째 pod 접속 - mongo replica set 중 첫번째
 
-```shell
-kubectl exec -ti mongo-0 mongo
-```
+  ```shell
+  kubectl exec -ti mongo-0 mongo
+  ```
 
 * mongodb 상태 확인
 
-```shell
-rs.status()
+  ```shell
+  rs.status()
 
-or
+  or
 
-rs.conf()
-```
+  rs.conf()
+  ```
 
 * 다른 확인 방법 - kubnetes dns 이용
 
-> <https://kubernetes.io/docs/concepts/services-networking/connect-applications-service>
+  > <https://kubernetes.io/docs/concepts/services-networking/connect-applications-service>
 
-```shell
-$ kubectl get services kube-dns --namespace=kube-system
-NAME       CLUSTER-IP   EXTERNAL-IP   PORT(S)         AGE
-kube-dns   10.0.0.10    <none>        53/UDP,53/TCP   8m
+  ```shell
+  $ kubectl get services kube-dns --namespace=kube-system
+  NAME       CLUSTER-IP   EXTERNAL-IP   PORT(S)         AGE
+  kube-dns   10.0.0.10    <none>        53/UDP,53/TCP   8m
 
-$ kubectl run curl --image=radial/busyboxplus:curl -i --tty
-If you don't see a command prompt, try pressing enter.
+  $ kubectl run curl --image=radial/busyboxplus:curl -i --tty
+  If you don't see a command prompt, try pressing enter.
 
-[ root@curl-2716574283-n4fh5:/ ]$ nslookup mongo-0.mongo
-Server:    10.31.240.10
-Address 1: 10.31.240.10 kube-dns.kube-system.svc.cluster.local
+  [ root@curl-2716574283-n4fh5:/ ]$ nslookup mongo-0.mongo
+  Server:    10.31.240.10
+  Address 1: 10.31.240.10 kube-dns.kube-system.svc.cluster.local
 
-Name:      mongo-0.mongo
-Address 1: 10.28.0.6 mongo-0.mongo.default.svc.cluster.local
+  Name:      mongo-0.mongo
+  Address 1: 10.28.0.6 mongo-0.mongo.default.svc.cluster.local
 
-$ kubectl attach curl-2716574283-n4fh5 -c curl -i -t
-```
+  $ kubectl attach curl-2716574283-n4fh5 -c curl -i -t
+  ```
+
+<br>
 
 ### Kubernetes cluster 에 구성된 mongodb replica pod 초기화
 
@@ -232,6 +234,8 @@ gcloud container clusters delete "hello-mongo"
 
 ```
 
+<br>
+
 ### 외부에서 kubernetes cluster 내부 mongo replica set 접속 시 참고
 
 > <https://kubernetes.io/docs/concepts/services-networking/ingress/>
@@ -256,6 +260,8 @@ gcloud container clusters delete "hello-mongo"
   ```shell
   gcloud auth application-default login
   ```
+
+<br>
 
 ### PersistentVolumeClaim is not bound
 
