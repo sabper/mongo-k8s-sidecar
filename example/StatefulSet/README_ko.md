@@ -39,9 +39,16 @@
   gcloud config set compute/zone us-west1-a
   ```
 
+<br>
+
 ### GCP kubnetes cluster 생성
 
 * 새로운 Kubernetes cluster 생성 - 소요 시간 약 5분
+
+  * vm instance 3대 구성됨
+
+  * vm instance 개수 등을 설정 옵션
+    > <https://cloud.google.com/sdk/gcloud/reference/container/clusters/create>
 
   ```shell
   gcloud container clusters create hello-mongo
@@ -100,13 +107,15 @@
 
 * Headless Service
   
-  cluster ip 를 none 으로 세팅. 외부 ip가 존재하지 않고 자체 dns가 구성됨
+  * service 설정에서 cluster ip 를 none 으로 세팅
+  
+  * 외부 ip가 존재하지 않고 자체 dns가 구성됨
   
   > <https://kubernetes.io/docs/concepts/services-networking/service/#headless-services>
 
 * StatefulSet
 
-  mongodb replica set pod 을 구성하는 service
+  * mongodb replica set pod 을 구성하는 service
 
   > StatefulSet <https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/>
 
@@ -198,7 +207,7 @@
 
 <br>
 
-### Kubernetes cluster 에 구성된 mongodb replica pod 초기화
+### Kubernetes cluster 에 구성된 mongodb replica 초기화
 
 * statefulset 삭제
 
@@ -226,12 +235,17 @@
   persistentvolumeclaim "mongo-persistent-storage-mongo-2" deleted
   ```
 
-* cluster 삭제
+* cluster 삭제 - GCP compute engine instance, instance group, instance template, disk 같이 삭제됨
 
   ```shell
-  $ gcloud container clusters delete "hello-mongo"
+  $ gcloud container clusters delete "{Kubernetes cluster name}"
 
-  delte message...
+  The following clusters will be deleted.
+  - [hello-mongo] in [us-central1-a]
+
+  Do you want to continue (Y/n)?  Y
+
+  Deleting cluster hello-mongo...-
   ```
 
 <br>
